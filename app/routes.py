@@ -81,3 +81,16 @@ def update_client(cliente_id: int, cliente: ClienteCreate,
     db.commit()
     db.refresh(db_cliente)
     return db_cliente
+
+
+# Eliminar cliente
+@router.delete("/delete_client/{cliente_id}", response_model=dict)
+def delete_client(cliente_id: int, db: Session = Depends(get_db)):
+    db_cliente = db.query(Cliente).filter(Cliente.id == cliente_id).first()
+    if not db_cliente:
+        raise HTTPException(status_code=404, detail="Cliente no encontrado")
+    
+    db.delete(db_cliente)
+    db.commit()
+    
+    return {"message": f"Cliente con ID {cliente_id} eliminado exitosamente"}   
