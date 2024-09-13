@@ -1,0 +1,21 @@
+# Archivos y carpetas generados por el sistema operativo
+.DS_Store
+Thumbs.db
+
+# Dependencias y directorios generados por el lenguaje de programación
+/node_modules
+/dist
+/build
+
+# Archivos de configuración local
+.env
+venv
+__pycache__
+
+
+# Archivos de registro y salida
+*.log
+
+# Archivos de respaldo y temporales
+*.bak
+*.tmp
