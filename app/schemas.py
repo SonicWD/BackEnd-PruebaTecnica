@@ -17,7 +17,7 @@ class ClienteCreate(BaseModel):
     telefono: str
 
     class Config:
-        orm_mode = True
+        from_attributes= True
 
 class ClienteResponse(BaseModel):
     id: int
@@ -31,7 +31,7 @@ class ClienteResponse(BaseModel):
     fecha_actualizacion: Optional[datetime] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
         json_encoders = {
             datetime: lambda v: v.isoformat() if v else None
         }
