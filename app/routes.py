@@ -82,6 +82,23 @@ def update_client(cliente_id: int, cliente: ClienteCreate,
     db.refresh(db_cliente)
     return db_cliente
 
+# Obtener cliente por ID
+@router.get("/get_client/{cliente_id}", response_model=ClienteResponse)
+def get_client(cliente_id: int, db: Session = Depends(get_db)):
+    db_cliente = db.query(Cliente).filter(Cliente.id == cliente_id).first()
+    if not db_cliente:
+        raise HTTPException(status_code=404, detail="Cliente no encontrado")
+    return db_cliente
+
+# Endpoint para obtener los detalles de un cliente por ID
+@router.get("/update_client/{id}", response_model=ClienteResponse)
+def get_client(id: int, db: Session = Depends(get_db)):
+    cliente = db.query(Cliente).filter(Cliente.id == id).first()
+
+    if not cliente:
+        raise HTTPException(status_code=404, detail="Cliente no encontrado")
+
+    return cliente
 
 # Eliminar cliente
 @router.delete("/delete_client/{cliente_id}", response_model=dict)
